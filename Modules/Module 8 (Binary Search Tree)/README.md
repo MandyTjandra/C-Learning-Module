@@ -3,13 +3,12 @@
 This module covers the entire hierarchy of Tree structures in C:
 1.  **Binary Search Trees (BST):** The foundational structure.
 2.  **Tree Traversals:** Different ways to visit every node (DFS vs BFS).
-3.  **AVL Trees:** Optimizing BSTs to remain balanced ($O(\log n)$).
+3.  **AVL Trees:** Optimizing BSTs to remain balanced (O(log n)).
 4.  **Sets & Maps:** Real-world applications of Balanced Trees.
 
 ---
 
 ## 1. Binary Search Tree (BST) Basics
-
 
 A BST organizes data so that for every node, the **Left Child < Parent < Right Child**.
 
@@ -44,7 +43,6 @@ Deleting a node is the hardest part of BSTs. We handle three cases:
 
 ## 2. Tree Traversals (`Transversal.c`)
 
-
 How do we "read" or "visit" every node in a tree?
 
 ### A. Depth-First Search (DFS)
@@ -66,7 +64,6 @@ Visits nodes level-by-level (Level 1, then Level 2, etc.).
 ---
 
 ## 3. AVL Trees (Self-Balancing)
-
 
 Standard BSTs can become "skewed" (like a linked list) if data is inserted in sorted order (1, 2, 3, 4, 5). **AVL Trees** fix this by ensuring the height difference (Balance Factor) between left and right subtrees is never more than 1.
 
@@ -97,7 +94,7 @@ We use Balanced BSTs (AVL) to build powerful Abstract Data Types (ADTs).
 
 A **Set** is a collection of **unique** keys, stored in sorted order.
 
-* **Why AVL?** Allows checking if a number exists (`avl_find`) in  time, which is much faster than an array .
+* **Why AVL?** Allows checking if a number exists (`avl_find`) in O(log n) time, which is much faster than an array O(n).
 * **Feature:** Duplicates are automatically rejected during insertion.
 
 ### B. The Map (`Map.c`)
@@ -131,8 +128,8 @@ printf("%d", map_get(&m, 1)); // Returns 2
 
 | Structure | Ordering | Duplicates? | Search Speed | Best For |
 | --- | --- | --- | --- | --- |
-| **Array** | None (unless sorted) | Yes |  | Simple storage |
-| **BST** | Sorted | Depends |  (Worst case) | Hierarchical data |
-| **AVL Tree** | Sorted | Depends |  | Performance critical lookups |
-| **Set** | Sorted | No |  | Checking "Have I seen this before?" |
-| **Map** | Sorted by Key | Unique Keys |  | Dictionaries, Caching |
+| **Array** | None (unless sorted) | Yes | O(N) | Simple storage |
+| **BST** | Sorted | Depends | O(N) (Worst case) | Hierarchical data |
+| **AVL Tree** | Sorted | Depends | O(log N) | Performance critical lookups |
+| **Set** | Sorted | No | O(log N) | Checking "Have I seen this before?" |
+| **Map** | Sorted by Key | Unique Keys | O(log N) | Dictionaries, Caching |
