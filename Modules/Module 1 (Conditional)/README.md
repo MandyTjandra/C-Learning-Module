@@ -1,73 +1,74 @@
 # Module 1: Conditional Statements in C
 
-This module introduces decision-making structures in C programming. Below are the source codes and detailed explanations for each concept.
+This module introduces decision-making and control-flow branching in the C programming language. You will learn to use `if`, `else`, `else if`, ternary operators, and `switch-case` statements.
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Direct program flow using `if`, `else if`, and `else` conditional structures.
+- Evaluate relational conditions (`==`, `!=`, `<`, `>`, `<=`, `>=`).
+- Pass memory addresses to `scanf("%d", &var)` for reading console inputs.
+- Implement discrete jump-table selections using `switch`, `case`, `break`, and `default`.
+- Write concise inline conditional expressions using the ternary operator `? :`.
 
 ---
 
 ## 1. Simple Decision (`If.c`)
-This example demonstrates the basic `if` statement. The code inside the block executes only when the condition is true.
+
+The basic `if` statement executes the guarded block only when the condition evaluates to non-zero (true).
 
 ```c
 #include <stdio.h>
 
 int main(){
-    int balon = 0;
-    balon = 4;
+    int balon = 4;
     if (balon < 5){
-        printf("Balonku ku pegang erat-erat.");
+        printf("Balonku ku pegang erat-erat.\n");
     }
-
     return 0;
 }
-
 ```
 
-### 💡 Code Explanation
-
-1. **Variable Setup:** We define an integer `balon` and set it to `4`.
-2. **The Condition:** The line `if (balon < 5)` checks if the value is less than 5.
-3. **Execution:** Since 4 is indeed less than 5, the condition is **TRUE**, and the program prints *"Balonku ku pegang erat-erat."*
-4. **Note:** If `balon` were 6, the program would skip the `printf` and do nothing.
+**💡 Code Explanation:**
+1. **Condition:** `if (balon < 5)` evaluates whether `balon` is strictly less than 5.
+2. **Execution:** Since 4 is less than 5, the condition evaluates to true (1) and executes the block.
 
 ---
 
 ## 2. Binary Choice (`IfElse.c`)
 
-This example uses `if-else` to handle a "True vs False" scenario, simulating a PIN verification.
+An `if-else` block provides two alternative pathways:
 
 ```c
 #include <stdio.h>
 
 int main(){
-
     int pin;
 
     printf("Masukan 5 digit pin: ");
     scanf("%d", &pin);
 
     if (pin != 12345) {
-        printf("Pin yang dimasukan salah.");
+        printf("Pin yang dimasukan salah.\n");
     } else {
-        printf("Pin benar."); 
+        printf("Pin benar.\n"); 
     }
     
     return 0;
 }
-
 ```
 
-### 💡 Code Explanation
-
-1. **Input:** The user enters a PIN number.
-2. **Comparison:** The condition `if (pin != 12345)` checks if the input is **NOT equal** to the stored PIN.
-3. **True Block:** If the input is wrong (e.g., 11111), it prints *"Pin yang dimasukan salah."*
-4. **Else Block:** If the condition is false (meaning the input *is* 12345), the program automatically jumps to the `else` block and prints *"Pin benar."*
+**💡 Code Explanation:**
+1. **`scanf("%d", &pin)`**: Reads an integer from `stdin` and writes it to the address `&pin`.
+2. **`pin != 12345`**: Inequality operator. If true, the first branch executes; otherwise, the `else` branch executes.
 
 ---
 
 ## 3. Multiple Conditions (`IfElseIf.c`)
 
-When there are more than two options, we use the `else if` ladder. This simulates a light switch.
+When multiple mutually exclusive conditions exist, use the `else if` ladder:
 
 ```c
 #include <stdio.h>
@@ -79,29 +80,22 @@ int main(){
     scanf("%d", &x);
 
     if (x == 1){
-        printf("Lampu menyala.");
+        printf("Lampu menyala.\n");
     } else if (x == 0){
-        printf("Lamput mati.");
-    } else 
-        printf("Perintah tidak dikenal.");
+        printf("Lampu mati.\n");
+    } else {
+        printf("Perintah tidak dikenal.\n");
+    }
 
     return 0;
 }
-
 ```
-
-### 💡 Code Explanation
-
-1. **Sequential Checking:** The program checks conditions from top to bottom.
-2. **First Check:** `if (x == 1)` checks if the light should be ON.
-3. **Second Check:** `else if (x == 0)` checks if the light should be OFF.
-4. **Fallback (`else`):** If the user types any other number (e.g., 99), neither condition is met, so it prints *"Perintah tidak dikenal"* (Unknown command).
 
 ---
 
 ## 4. Menu Selection (`SwitchCase.c`)
 
-The `switch` statement is cleaner than multiple `if-else` blocks when checking a single variable against specific constants. This example identifies License Plates.
+The `switch` statement matches a single integral expression against multiple `case` labels:
 
 ```c
 #include <stdio.h>
@@ -110,46 +104,38 @@ int main()
 {
     char platNomor;
     printf("Masukkan huruf awal plat nomor Anda: ");
-    scanf("%c", &platNomor);
+    scanf(" %c", &platNomor);
 
     switch(platNomor)
     {
         case 'L':
-            printf("Plat nomor Surabaya");
+            printf("Plat nomor Surabaya\n");
             break;
-
         case 'B':
-            printf("Plat nomor Jakarta");
+            printf("Plat nomor Jakarta\n");
             break;
-
         case 'D':
-            printf("Plat nomor Bandung");
+            printf("Plat nomor Bandung\n");
             break;
-
         case 'N':
-            printf("Plat nomor Malang/Lumajang");
+            printf("Plat nomor Malang/Lumajang\n");
             break;
-
         default:
-            printf("Karakter plat nomor tidak diketahui");
+            printf("Karakter plat nomor tidak diketahui\n");
     } 
     return 0;
 }
-
 ```
 
-### 💡 Code Explanation
-
-1. **Switching:** The command `switch(platNomor)` takes the character input and jumps to the matching `case`.
-2. **Cases:** If input is 'L', it prints "Surabaya". If 'B', it prints "Jakarta", etc.
-3. **The `break` Keyword:** This is crucial. It stops the code from running into the next case. Without `break`, inputting 'L' would print Surabaya AND Jakarta.
-4. **Default:** This acts like the final `else`. If the input is 'Z', it prints *"Karakter plat nomor tidak diketahui"*.
+**💡 Code Explanation:**
+1. **`break;`**: Stops execution from falling through into the subsequent case.
+2. **`default:`**: Executed when no case matches the input character.
 
 ---
 
 ## 5. Ternary Operator (`OperatorKondisional.c`)
 
-A shorthand way to write a simple `if-else` in a single line.
+A concise inline replacement for simple two-way branching:
 
 ```c
 #include <stdio.h>
@@ -160,17 +146,29 @@ int main (){
     printf("Masukan nilai murid: ");
     scanf("%f", &nilai);
 
-    printf(nilai <= 75 ? "Remedial\n" : "Lulus\n");
+    printf("%s\n", (nilai <= 75 ? "Remedial" : "Lulus"));
     return 0;
 }
-
 ```
 
-### 💡 Code Explanation
+---
 
-1. **Syntax:** `(Condition) ? True_Value : False_Value`.
-2. **The Logic:**
-* It checks: Is `nilai <= 75`?
-* **? (If True):** The result is the string `"Remedial\n"`.
-* **:(If False):** The result is the string `"Lulus\n"`.
-3. **Result:** The selected string is then passed directly to `printf`.
+## ⚠️ Common Pitfalls & Tips
+
+1. **Forgetting `&` in `scanf`:**
+   Passing `scanf("%d", x)` instead of `scanf("%d", &x)` passes the *value* of `x` as a memory address, causing immediate segmentation fault (`SIGSEGV`).
+2. **Assignment (`=`) in Conditions:**
+   Writing `if (x = 5)` assigns 5 to `x` and always evaluates to true. Always use equality: `if (x == 5)`.
+3. **Missing `break` in `switch` (Fall-Through):**
+   In C, omitting `break` causes execution to continue running through all subsequent cases until a `break` or the end of the block is reached.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (Even or Odd Parity)**:
+  Prompt the user for an integer. Use `%` and an `if-else` statement to print whether it is even or odd.
+- 🟡 **Challenge 2 (Four-Function Menu Calculator)**:
+  Prompt the user to enter two numbers and an arithmetic operator character (`+`, `-`, `*`, `/`). Compute and print the result using a `switch` statement, displaying an error on division by zero.
+- 🔴 **Challenge 3 (Leap Year Validator)**:
+  Prompt for a year integer. Print `"Leap Year"` if divisible by 4 and not 100, or if divisible by 400; otherwise print `"Common Year"`.

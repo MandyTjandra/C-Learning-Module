@@ -1,6 +1,19 @@
 # Module 7: Linear Data Structures
 
-This module covers advanced linear storage structures. Unlike static arrays, these structures define specific rules for how data is added, removed, and managed in memory.
+This module covers dynamic linear storage structures implemented in pure C. Unlike static arrays, these structures define explicit pointer-based memory allocation rules using `malloc`, `realloc`, and `free`.
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Construct dynamic Node-based linked lists (Singly, Doubly, and Circular Linked Lists).
+- Understand double pointers (`Node **head`) for mutating list heads in-place.
+- Implement Stack (LIFO) and Queue (FIFO) abstract data types using both contiguous arrays and linked nodes.
+- Implement Double-Ended Queues (Deque) supporting push/pop at both front and rear.
+- Build array-based and heap-based Priority Queues.
+- Build resizable dynamic arrays with exponential capacity doubling via `realloc()`.
+- Prevent memory leaks by freeing dynamically allocated heap memory with `free()`.
 
 ---
 
@@ -245,3 +258,25 @@ void printArray(int *arr, int size) {
 * `int *it = arr`: The iterator starts at index 0.
 * `it < arr + size`: The loop stops when the pointer moves past the last element.
 * `++it`: Moves the pointer to the next memory address (next integer).
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **Memory Leaks from Missing `free()`:**
+   Every call to `malloc()` or `realloc()` allocates memory on the Heap that the operating system will not reclaim automatically while your program runs. Every dynamically allocated node must eventually be released with `free()`.
+2. **Dangling Pointers After `free()`:**
+   Calling `free(ptr)` releases the memory block, but `ptr` still retains the address. Accessing `*ptr` afterwards is a "use-after-free" bug. Always set `ptr = NULL;` after freeing.
+3. **Double Pointer Requirement for List Mutation:**
+   If a function modifies what `head` points to (e.g. `pushFront(&head, val)`), it must accept `Node **head` rather than `Node *head`, otherwise only a local copy of the pointer is changed.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (Linked List Length)**:
+  Write a function `int getLength(Node *head)` that counts and returns the total number of nodes in a singly linked list.
+- 🟡 **Challenge 2 (Reverse a Singly Linked List)**:
+  Write an in-place iterative function `void reverseList(Node **head)` that reverses the node direction of a singly linked list.
+- 🔴 **Challenge 3 (Balanced Parentheses with C Stack)**:
+  Using the linked-list or array stack implementation from this module, write a program that validates whether a string containing parentheses `()`, brackets `[]`, and braces `{}` is balanced.

@@ -1,6 +1,18 @@
 # Module 6: File Handling in C
 
-So far, all variables used in our programs are lost when the program ends. **File Handling** allows us to save data permanently to a text file and read it back later.
+So far, all variables used in our programs are lost when the program ends. **File Handling** allows us to persist data permanently to secondary disk storage and read it back across program executions.
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Declare and manage file stream pointers (`FILE *fptr`).
+- Understand file access modes: write (`"w"`), read (`"r"`), and append (`"a"`).
+- Validate file pointers against `NULL` to handle missing or inaccessible files gracefully.
+- Read data sequentially line-by-line using `fgets()` until End-of-File (`EOF`).
+- Write formatted text records to files using `fprintf()` and `fputs()`.
+- Prevent resource and descriptor leaks by closing files with `fclose()`.
 
 ---
 
@@ -129,3 +141,32 @@ int main(){
 1. **Mode "r"**: Opens the file for reading only. If the file doesn't exist, `fopen` returns `NULL`.
 2. **`fgets(buffer, size, pointer)`**: Reads one line of text from the file.
 3. **`while(fgets(...))`**: The loop continues as long as `fgets` successfully reads a new line. When it reaches the End of File (EOF), it returns NULL and the loop stops.
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **Forgetting to Check for `NULL`:**
+   If `fopen()` fails (e.g. file not found or permissions denied), it returns `NULL`. Attempting to read from or write to a `NULL` pointer causes an immediate crash:
+   ```c
+   FILE *fptr = fopen("data.txt", "r");
+   if (fptr == NULL) {
+       perror("Error opening file");
+       return 1;
+   }
+   ```
+2. **The Destructive Nature of `"w"` Mode:**
+   Opening a file with `"w"` mode immediately erases its existing contents. If you want to add content to an existing file without deleting it, use `"a"` (append) mode.
+3. **Leaking File Descriptors:**
+   Every open file consumes an operating system handle. Always balance every `fopen()` call with a matching `fclose()`.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (File Line Counter)**:
+  Write a program that opens a text file, reads it line by line with `fgets()`, and prints the total number of lines contained in the file.
+- 🟡 **Challenge 2 (Simple Student Logger)**:
+  Create a program that prompts the user for student records (Name and Score) and appends them to a file called `grades.txt` using `"a"` mode.
+- 🔴 **Challenge 3 (File Copy Utility)**:
+  Write a C program that takes a source file name and destination file name, reads the source file, and copies all its contents into the destination file.

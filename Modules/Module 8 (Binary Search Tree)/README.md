@@ -1,10 +1,22 @@
 # Module 8: Trees, Traversals, and Associative Structures
 
-This module covers the entire hierarchy of Tree structures in C:
+This module covers the entire hierarchy of Tree data structures implemented in pure C:
 1.  **Binary Search Trees (BST):** The foundational structure.
-2.  **Tree Traversals:** Different ways to visit every node (DFS vs BFS).
-3.  **AVL Trees:** Optimizing BSTs to remain balanced (O(log n)).
-4.  **Sets & Maps:** Real-world applications of Balanced Trees.
+2.  **Tree Traversals:** In-order, Pre-order, and Post-order visits.
+3.  **AVL Trees:** Self-balancing BSTs maintaining $O(\log N)$ height balance.
+4.  **Sets & Maps:** Real-world applications of balanced trees in C.
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Construct Binary Search Trees (BST) with recursive and iterative insertion, search, and deletion.
+- Perform In-order (sorted), Pre-order, and Post-order Depth-First tree traversals.
+- Understand the BST skew problem where unbalanced trees degrade to $O(N)$ linked lists.
+- Compute node balance factors: $\text{Balance} = \text{height}(\text{left}) - \text{height}(\text{right})$.
+- Execute AVL self-balancing tree rotations: Left (LL), Right (RR), Left-Right (LR), and Right-Left (RL).
+- Implement custom $O(\log N)$ Set and Map associative abstractions in pure C.
 
 ---
 
@@ -133,3 +145,25 @@ printf("%d", map_get(&m, 1)); // Returns 2
 | **AVL Tree** | Sorted | Depends | O(log N) | Performance critical lookups |
 | **Set** | Sorted | No | O(log N) | Checking "Have I seen this before?" |
 | **Map** | Sorted by Key | Unique Keys | O(log N) | Dictionaries, Caching |
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **Unbalanced BST Degradation:**
+   Inserting pre-sorted numbers (e.g. `1, 2, 3, 4, 5`) into a standard BST creates a degenerate tree that acts like a linked list, degrading search time from $O(\log N)$ to $O(N)$. Self-balancing trees (AVL) prevent this.
+2. **Deleting Nodes with Two Children:**
+   When removing a node with two children, replace its value with its **in-order successor** (the smallest value in its right subtree) or **in-order predecessor**, then delete that successor node.
+3. **Updating Node Heights During Rotations:**
+   When rotating an AVL subtree, always recalculate and update the `height` attributes of both the rotated node and the new parent node immediately.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (Tree Height & Node Count)**:
+  Write recursive functions `int countNodes(Node *root)` and `int getHeight(Node *root)` for a binary search tree.
+- 🟡 **Challenge 2 (Validate Binary Search Tree)**:
+  Write a function `bool isBST(Node *root, int minVal, int maxVal)` that verifies whether a given binary tree satisfies the BST invariant.
+- 🔴 **Challenge 3 (AVL Balance Verification)**:
+  Write a function `bool isAVL(Node *root)` that checks whether every node in a binary tree has a balance factor of $-1$, $0$, or $+1$ and that each sub-tree is height-balanced.

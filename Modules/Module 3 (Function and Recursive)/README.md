@@ -4,6 +4,17 @@ This module introduces **Modular Programming**. Instead of writing all logic in 
 
 ---
 
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Declare and define modular functions with void and non-void return types.
+- Forward declare function signatures using prototypes.
+- Pass parameters into functions and return computed values.
+- Trace recursive execution stacks and identify activation records.
+- Implement explicit base cases to prevent infinite recursion and stack overflow.
+
+---
+
 ## 1. Function Basics
 
 ### A. Defining Functions (`PendefinisianFungsi.c`)
@@ -240,3 +251,25 @@ int main(){
 * ... `2 * fact(1)`
 * ... `1 * fact(0)` -> Returns 1.
 2. **Syntax Note:** `n *= fact(n-1)` is a shorthand for `n = n * fact(n-1)`.
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **Missing Function Prototype:**
+   In C, invoking a function before declaring or defining it triggers a compiler warning or error (`implicit declaration of function`). Always place a prototype above `main()`: `int fact(int n);`.
+2. **Missing Base Case (Stack Overflow):**
+   A recursive function that fails to progress toward its base case consumes all call stack frames, terminating with a segmentation fault (`SIGSEGV`).
+3. **Pass-by-Value Semantics:**
+   In C, all arguments are passed **by value** (as copies). Mutating a parameter inside a function does not mutate the variable in the caller. To mutate caller variables, pass memory pointers (covered in Module 4).
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (Power Function)**:
+  Write a recursive function `long long power(int base, int exp)` that calculates $\text{base}^{\text{exp}}$ recursively. Note: $\text{base}^0 = 1$.
+- 🟡 **Challenge 2 (Fibonacci Sequence)**:
+  Write a recursive function `int fib(int n)` that computes the $n$-th Fibonacci term ($F(0)=0, F(1)=1, F(n) = F(n-1) + F(n-2)$).
+- 🔴 **Challenge 3 (Greatest Common Divisor via Euclidean Algorithm)**:
+  Write a recursive function `int gcd(int a, int b)` using the Euclidean algorithm: $\text{gcd}(a, 0) = a$, and $\text{gcd}(a, b) = \text{gcd}(b, a \pmod b)$.

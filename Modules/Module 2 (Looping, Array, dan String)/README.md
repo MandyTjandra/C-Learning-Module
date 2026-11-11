@@ -4,6 +4,20 @@ This module covers control flow (Loops), data collections (Arrays), and text han
 
 ---
 
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Construct `for`, `while`, and `do-while` loops with step counters.
+- Control loop iteration flow using `break` and `continue`.
+- Declare, index, and traverse 1D arrays and 2D matrices.
+- Calculate array lengths using the `sizeof(arr) / sizeof(arr[0])` idiom.
+- Perform statistical operations on arrays: search minimum/maximum, calculate the statistical mode, and reverse arrays.
+- Understand null-terminated character strings (`\0`).
+- Differentiate between unsafe `gets()` and secure buffer-bounded `fgets()`.
+- Use standard `<string.h>` library functions (`strlen`, `strcpy`, `strcat`, `strcmp`).
+
+---
+
 ## 1. Looping Structures (Basics & Advanced)
 
 ### A. The While Loop (`While.c`)
@@ -384,3 +398,30 @@ int main () {
 
 * **The Rule:** You cannot use `if (a == b)` for strings in C.
 * **The Function:** `strcmp` returns 0 if strings are exact matches. It returns a non-zero value if they are different.
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **The Inherent Danger of `gets()`:**
+   `gets()` has no buffer-size parameter, leading to notorious buffer overflow exploits. It was officially deprecated in C99 and removed in C11. Always use `fgets(buffer, sizeof(buffer), stdin)`.
+2. **Trailing Newline in `fgets()`:**
+   `fgets()` includes the trailing `\n` character in the buffer. To strip it:
+   ```c
+   str[strcspn(str, "\n")] = '\0';
+   ```
+3. **Comparing Strings with `==`:**
+   In C, `if (str1 == str2)` compares the *memory addresses* of the pointers, NOT the string contents. Always use `strcmp(str1, str2) == 0`.
+4. **Buffer Sizing for Strings:**
+   Always allocate $+1$ byte for the null terminator: a word of 5 characters requires `char str[6];`.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (In-Place Array Reversal)**:
+  Prompt the user to enter 6 integers into an array. Reverse the array in-place using a two-pointer approach (without creating a second array) and display the result.
+- 🟡 **Challenge 2 (Array Statistics & Mode)**:
+  Given an array of 10 student exam scores, write functions to compute the minimum, maximum, mean average, and statistical mode (most frequent score).
+- 🔴 **Challenge 3 (Case-Insensitive Palindrome Checker)**:
+  Read a line of text using `fgets()`. Remove any trailing newline, convert letters to lowercase, and check whether the string is a palindrome.

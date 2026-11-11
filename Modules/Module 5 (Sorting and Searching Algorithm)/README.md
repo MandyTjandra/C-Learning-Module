@@ -1,6 +1,17 @@
 # Module 5: Sorting and Searching Algorithms
 
-This module moves beyond basic syntax into **Computer Science Algorithms**. You will learn how to organize data (Sorting) and how to find specific data efficiently (Searching).
+This module moves beyond basic syntax into **Computer Science Algorithms**. You will learn how to organize data (Sorting) and how to locate specific elements efficiently (Searching), analyzing time and space complexity.
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Implement sequential Linear Search ($O(N)$) and logarithmic Binary Search ($O(\log N)$).
+- Understand why Binary Search strictly requires sorted input data.
+- Implement elementary quadratic sorts: Bubble Sort and Insertion Sort ($O(N^2)$).
+- Implement efficient divide-and-conquer sorts: Merge Sort and Quick Sort ($O(N \log N)$).
+- Compare asymptotic time complexities (best, average, worst case) and memory overhead.
 
 ---
 
@@ -177,3 +188,38 @@ int partition(int arr[], int left, int right) {
 1. **The Pivot:** We choose `arr[left]` as the reference point.
 2. **Partitioning:** We iterate through the list. If a number is smaller than the pivot, we throw it to the "left" side (using `storeIndex`).
 3. **Recursion:** After placing the pivot in its exact final spot, we recursively QuickSort the left subarray and the right subarray.
+
+---
+
+## 📊 Algorithm Complexity Cheat Sheet
+
+| Algorithm | Best Time | Average Time | Worst Time | Space | Stability |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Linear Search** | $O(1)$ | $O(N)$ | $O(N)$ | $O(1)$ | N/A |
+| **Binary Search** | $O(1)$ | $O(\log N)$ | $O(\log N)$ | $O(1)$ | N/A |
+| **Bubble Sort** | $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | Stable |
+| **Insertion Sort**| $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | Stable |
+| **Merge Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N \log N)$ | $O(N)$ | Stable |
+| **Quick Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N^2)$ | $O(\log N)$ | Unstable |
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **Binary Search on Unsorted Data:**
+   Binary search requires the collection to be pre-sorted. Calling binary search on unsorted arrays yields unpredictable or incorrect results.
+2. **Integer Overflow in Midpoint Calculation:**
+   Writing `int mid = (left + right) / 2;` can cause integer overflow when `left + right > INT_MAX`. Use the safe formula: `int mid = left + (right - left) / 2;`.
+3. **Worst-Case in QuickSort:**
+   If the pivot is always the smallest or largest element (e.g. already sorted data with first element as pivot), QuickSort degrades to $O(N^2)$.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (Count Search Occurrences)**:
+  Write a modified binary search function that returns the total count of duplicate target elements present in a sorted array.
+- 🟡 **Challenge 2 (Descending Insertion Sort)**:
+  Modify the insertion sort implementation to sort an array in descending order (highest to lowest).
+- 🔴 **Challenge 3 (String Array Sorting with QuickSort)**:
+  Adapt the QuickSort algorithm to sort an array of C-strings (`char *names[]`) alphabetically using `strcmp()`.

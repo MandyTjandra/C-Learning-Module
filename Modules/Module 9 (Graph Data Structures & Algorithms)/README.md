@@ -1,6 +1,18 @@
-# Module 9: Graph Algorithms
+# Module 9: Graph Algorithms in C
 
-A **Graph** is a collection of **Vertices** (Nodes) connected by **Edges** (Links). Graphs are used to model real-world networks like social media connections, Google Maps routes, and internet routing.
+A **Graph** is a non-linear data structure consisting of **Vertices** (Nodes) connected by **Edges** (Links). Graphs model real-world networks such as computer routing, social networks, transportation grids, and dependency topologies.
+
+---
+
+## 🎯 Learning Objectives
+
+By the end of this module, students and learners will be able to:
+- Model graphs using Adjacency Matrices, Adjacency Lists, and Edge Lists in pure C.
+- Model implicit grid graphs (e.g. 2D mazes and tile boards).
+- Traverse graphs using Breadth-First Search (BFS) and Depth-First Search (DFS).
+- Implement Disjoint-Set Union (DSU / Union-Find) with path compression and union-by-rank.
+- Construct Minimum Spanning Trees (MST) using Kruskal's algorithm.
+- Calculate single-source shortest paths on weighted graphs using Dijkstra's algorithm.
 
 ---
 
@@ -132,3 +144,25 @@ if (dist[u] + weight < dist[v]) {
 
 
 * **Note:** This implementation uses a simple array scan (O(V^2)). For efficiency with huge graphs, a Priority Queue is usually preferred.
+
+---
+
+## ⚠️ Common Pitfalls & Tips
+
+1. **Adjacency Matrix Memory Footprint:**
+   An adjacency matrix requires $V \times V$ integers. For $V = 100,000$ vertices, an adjacency matrix requires $\sim 40\text{ GB}$ of RAM! Always use Adjacency Lists for sparse graphs ($E \ll V^2$).
+2. **Visited Array in Cyclic Graphs:**
+   Failing to track visited nodes in cyclic graphs causes BFS and DFS to loop indefinitely. Always mark `visited[u] = true` as soon as a vertex is discovered.
+3. **Negative Edge Weights with Dijkstra:**
+   Dijkstra's greedy assumption assumes distance only increases. If negative edges exist, Dijkstra can output incorrect shortest paths or loop forever.
+
+---
+
+## 🧪 Hands-On Practice Challenges
+
+- 🟢 **Challenge 1 (Connected Components Count)**:
+  Given an undirected graph represented as an adjacency matrix, use BFS or DFS to determine how many connected sub-networks exist.
+- 🟡 **Challenge 2 (Cycle Detection in Undirected Graph)**:
+  Implement cycle detection using the Disjoint-Set Union (DSU) data structure.
+- 🔴 **Challenge 3 (Maze Shortest Path via Implicit BFS)**:
+  Using the implicit grid representation (`Implisit.c`), find the minimum number of steps required to navigate from the top-left cell $(0,0)$ to the bottom-right cell $(R-1, C-1)$ in a 2D obstacle maze.
